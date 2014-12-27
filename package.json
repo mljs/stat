@@ -1,0 +1,34 @@
+{
+    "name": "ml-stat",
+    "version": "1.0.0",
+    "description": "Functions for computing stats on arrays and matrices",
+    "main": "index.js",
+    "scripts": {
+        "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive"
+    },
+    "repository": "mljs/stat",
+    "keywords": [
+        "stat",
+        "stats",
+        "vector",
+        "matrix",
+        "data",
+        "mining",
+        "datamining",
+        "machine",
+        "learning"
+    ],
+    "contributors": [
+        "Michaël Zasso"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/mljs/stat/issues"
+    },
+    "homepage": "https://github.com/mljs/stat",
+    "devDependencies": {
+        "mocha-better-spec-reporter": "latest",
+        "mocha": "latest",
+        "should": "latest"
+    }
+}
