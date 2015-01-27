@@ -1,6 +1,22 @@
 'use strict';
 // https://github.com/accord-net/framework/blob/development/Sources/Accord.Statistics/Tools.cs
 
+function max(values) {
+    var max = -Infinity, l=values.length;
+    for(var i=0; i<l; i++) {
+        if(values[i] > max) max = values[i];
+    }
+    return max;
+}
+
+function min(values) {
+    var min = Infinity, l=values.length;
+    for(var i=0; i<l; i++) {
+        if(values[i] < min) min = values[i];
+    }
+    return min;
+}
+
 function mean(values) {
     var sum = 0, l = values.length;
     for (var i = 0; i < l; i++)
@@ -303,6 +319,8 @@ function cumulativeSum(array) {
 }
 
 module.exports = {
+    min: min,
+    max: max,
     mean: mean,
     geometricMean: geometricMean,
     logGeometricMean: logGeometricMean,
