@@ -21,6 +21,7 @@ $ npm test
 ## Authors
 
   - [Michaël Zasso](https://github.com/targos)
+  - [Daniel Kostro](https://github.com/stropitek)
 
 ## License
 
