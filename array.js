@@ -1,26 +1,27 @@
 'use strict';
-// https://github.com/accord-net/framework/blob/development/Sources/Accord.Statistics/Tools.cs
 
-function max(values) {
-    var max = -Infinity, l = values.length;
+exports.max = function max(values) {
+    var max = -Infinity;
+    var l = values.length;
     for (var i = 0; i < l; i++) {
         if (values[i] > max) max = values[i];
     }
     return max;
-}
+};
 
-function min(values) {
-    var min = Infinity, l = values.length;
+exports.min = function min(values) {
+    var min = Infinity;
+    var l = values.length;
     for (var i = 0; i < l; i++) {
         if (values[i] < min) min = values[i];
     }
     return min;
-}
+};
 
-function minMax(values) {
-    var min = Infinity,
-        max = -Infinity,
-        l = values.length;
+exports.minMax = function minMax(values) {
+    var min = Infinity;
+    var max = -Infinity;
+    var l = values.length;
     for (var i = 0; i < l; i++) {
         if (values[i] < min) min = values[i];
         if (values[i] > max) max = values[i];
@@ -29,39 +30,39 @@ function minMax(values) {
         min: min,
         max: max
     };
-}
+};
 
-function mean(values) {
+exports.mean = function mean(values) {
     var sum = 0, l = values.length;
     for (var i = 0; i < l; i++)
         sum += values[i];
     return sum / l;
-}
+};
 
-function geometricMean(values) {
+exports.geometricMean = function geometricMean(values) {
     var sum = 0, l = values.length;
     for (var i = 0; i < l; i++)
         sum *= values[i];
     return Math.pow(sum, 1 / l);
-}
+};
 
-function logGeometricMean(values) {
+exports.logGeometricMean = function logGeometricMean(values) {
     var lnsum = 0, l = values.length;
     for (var i = 0; i < l; i++)
         lnsum += Math.log(values[i]);
     return lnsum / l;
-}
+};
 
-function grandMean(means, samples) {
+exports.grandMean = function grandMean(means, samples) {
     var sum = 0, n = 0, l = means.length;
     for (var i = 0; i < l; i++) {
         sum += samples[i] * means[i];
         n += samples[i];
     }
     return sum / n;
-}
+};
 
-function truncatedMean(values, percent, inPlace) {
+exports.truncatedMean = function truncatedMean(values, percent, inPlace) {
     if (typeof(inPlace) === 'undefined') inPlace = false;
 
     values = inPlace ? values : values.slice();
@@ -75,9 +76,9 @@ function truncatedMean(values, percent, inPlace) {
         sum += values[i];
 
     return sum / (l - 2 * k);
-}
+};
 
-function contraHarmonicMean(values, order) {
+exports.contraHarmonicMean = function contraHarmonicMean(values, order) {
     if (typeof(order) === 'undefined') order = 1;
     var r1 = 0, r2 = 0, l = values.length;
     for (var i = 0; i < l; i++) {
@@ -85,17 +86,17 @@ function contraHarmonicMean(values, order) {
         r2 += Math.pow(values[i], order);
     }
     return r1 / r2;
-}
+};
 
-function standardDeviation(values, unbiased) {
-    return Math.sqrt(variance(values, unbiased));
-}
+exports.standardDeviation = function standardDeviation(values, unbiased) {
+    return Math.sqrt(exports.variance(values, unbiased));
+};
 
-function standardError(values) {
-    return standardDeviation(values) / Math.sqrt(values.length);
-}
+exports.standardError = function standardError(values) {
+    return exports.standardDeviation(values) / Math.sqrt(values.length);
+};
 
-function median(values, alreadySorted) {
+exports.median = function median(values, alreadySorted) {
     if (typeof(alreadySorted) === 'undefined') alreadySorted = false;
     if (!alreadySorted) {
         values = values.slice();
@@ -107,9 +108,9 @@ function median(values, alreadySorted) {
     if (l % 2 === 0)
         return (values[half - 1] + values[half]) * 0.5;
     return values[half];
-}
+};
 
-function quartiles(values, alreadySorted) {
+exports.quartiles = function quartiles(values, alreadySorted) {
     if (typeof(alreadySorted) === 'undefined') alreadySorted = false;
     if (!alreadySorted) {
         values = values.slice();
@@ -118,15 +119,15 @@ function quartiles(values, alreadySorted) {
 
     var quart = values.length / 4;
     var q1 = values[Math.ceil(quart) - 1];
-    var q2 = median(values, true);
+    var q2 = exports.median(values, true);
     var q3 = values[Math.ceil(quart * 3) - 1];
 
     return {q1: q1, q2: q2, q3: q3};
-}
+};
 
-function variance(values, unbiased) {
+exports.variance = function variance(values, unbiased) {
     if (typeof(unbiased) === 'undefined') unbiased = true;
-    var theMean = mean(values);
+    var theMean = exports.mean(values);
     var theVariance = 0, l = values.length;
 
     for (var i = 0; i < l; i++) {
@@ -138,19 +139,19 @@ function variance(values, unbiased) {
         return theVariance / (l - 1);
     else
         return theVariance / l;
-}
+};
 
-function pooledStandardDeviation(samples, unbiased) {
-    return Math.sqrt(pooledVariance(samples, unbiased));
-}
+exports.pooledStandardDeviation = function pooledStandardDeviation(samples, unbiased) {
+    return Math.sqrt(exports.pooledVariance(samples, unbiased));
+};
 
-function pooledVariance(samples, unbiased) {
+exports.pooledVariance = function pooledVariance(samples, unbiased) {
     if (typeof(unbiased) === 'undefined') unbiased = true;
     var sum = 0;
     var length = 0, l = samples.length;
     for (var i = 0; i < l; i++) {
         var values = samples[i];
-        var vari = variance(values);
+        var vari = exports.variance(values);
 
         sum += (values.length - 1) * vari;
 
@@ -160,9 +161,9 @@ function pooledVariance(samples, unbiased) {
             length += values.length;
     }
     return sum / length;
-}
+};
 
-function mode(values) {
+exports.mode = function mode(values) {
     var l = values.length,
         itemCount = new Array(l),
         i;
@@ -192,12 +193,12 @@ function mode(values) {
     }
 
     return itemArray[maxIndex];
-}
+};
 
-function covariance(vector1, vector2, unbiased) {
+exports.covariance = function covariance(vector1, vector2, unbiased) {
     if (typeof(unbiased) === 'undefined') unbiased = true;
-    var mean1 = mean(vector1);
-    var mean2 = mean(vector2);
+    var mean1 = exports.mean(vector1);
+    var mean2 = exports.mean(vector2);
 
     if (vector1.length !== vector2.length)
         throw "Vectors do not have the same dimensions";
@@ -213,11 +214,11 @@ function covariance(vector1, vector2, unbiased) {
         return cov / (l - 1);
     else
         return cov / l;
-}
+};
 
-function skewness(values, unbiased) {
+exports.skewness = function skewness(values, unbiased) {
     if (typeof(unbiased) === 'undefined') unbiased = true;
-    var theMean = mean(values);
+    var theMean = exports.mean(values);
 
     var s2 = 0, s3 = 0, l = values.length;
     for (var i = 0; i < l; i++) {
@@ -237,11 +238,11 @@ function skewness(values, unbiased) {
     else {
         return g;
     }
-}
+};
 
-function kurtosis(values, unbiased) {
+exports.kurtosis = function kurtosis(values, unbiased) {
     if (typeof(unbiased) === 'undefined') unbiased = true;
-    var theMean = mean(values);
+    var theMean = exports.mean(values);
     var n = values.length, s2 = 0, s4 = 0;
 
     for (var i = 0; i < n; i++) {
@@ -263,29 +264,29 @@ function kurtosis(values, unbiased) {
     else {
         return m4 / (m2 * m2) - 3;
     }
-}
+};
 
-function entropy(values, eps) {
+exports.entropy = function entropy(values, eps) {
     if (typeof(eps) === 'undefined') eps = 0;
     var sum = 0, l = values.length;
     for (var i = 0; i < l; i++)
         sum += values[i] * Math.log(values[i] + eps);
     return -sum;
-}
+};
 
-function weightedMean(values, weights) {
+exports.weightedMean = function weightedMean(values, weights) {
     var sum = 0, l = values.length;
     for (var i = 0; i < l; i++)
         sum += values[i] * weights[i];
     return sum;
-}
+};
 
-function weightedStandardDeviation(values, weights) {
-    return Math.sqrt(weightedVariance(values, weights));
-}
+exports.weightedStandardDeviation = function weightedStandardDeviation(values, weights) {
+    return Math.sqrt(exports.weightedVariance(values, weights));
+};
 
-function weightedVariance(values, weights) {
-    var theMean = weightedMean(values, weights);
+exports.weightedVariance = function weightedVariance(values, weights) {
+    var theMean = exports.weightedMean(values, weights);
     var vari = 0, l = values.length;
     var a = 0, b = 0;
 
@@ -299,65 +300,35 @@ function weightedVariance(values, weights) {
     }
 
     return vari * (b / (b * b - a));
-}
+};
 
-function center(values, inPlace) {
+exports.center = function center(values, inPlace) {
     if (typeof(inPlace) === 'undefined') inPlace = false;
 
     var result = values;
     if (!inPlace)
         result = values.slice();
 
-    var theMean = mean(result), l = result.length;
+    var theMean = exports.mean(result), l = result.length;
     for (var i = 0; i < l; i++)
         result[i] -= theMean;
-}
+};
 
-function standardize(values, standardDev, inPlace) {
-    if (typeof(standardDev) === 'undefined') standardDev = standardDeviation(values);
+exports.standardize = function standardize(values, standardDev, inPlace) {
+    if (typeof(standardDev) === 'undefined') standardDev = exports.standardDeviation(values);
     if (typeof(inPlace) === 'undefined') inPlace = false;
     var l = values.length;
     var result = inPlace ? values : new Array(l);
     for (var i = 0; i < l; i++)
         result[i] = values[i] / standardDev;
     return result;
-}
+};
 
-function cumulativeSum(array) {
+exports.cumulativeSum = function cumulativeSum(array) {
     var l = array.length;
     var result = new Array(l);
     result[0] = array[0];
     for (var i = 1; i < l; i++)
         result[i] = result[i - 1] + array[i];
     return result;
-}
-
-module.exports = {
-    min: min,
-    max: max,
-    minMax: minMax,
-    mean: mean,
-    geometricMean: geometricMean,
-    logGeometricMean: logGeometricMean,
-    grandMean: grandMean,
-    truncatedMean: truncatedMean,
-    contraHarmonicMean: contraHarmonicMean,
-    standardDeviation: standardDeviation,
-    standardError: standardError,
-    median: median,
-    quartiles: quartiles,
-    variance: variance,
-    pooledStandardDeviation: pooledStandardDeviation,
-    pooledVariance: pooledVariance,
-    mode: mode,
-    covariance: covariance,
-    skewness: skewness,
-    kurtosis: kurtosis,
-    entropy: entropy,
-    weightedMean: weightedMean,
-    weightedStandardDeviation: weightedStandardDeviation,
-    weightedVariance: weightedVariance,
-    center: center,
-    standardize: standardize,
-    cumulativeSum: cumulativeSum
 };
