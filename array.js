@@ -1,5 +1,14 @@
 'use strict';
 
+function compareNumbers(a, b) {
+    return a - b;
+}
+
+/**
+ * Computes the maximum of the given values
+ * @param {Array} values
+ * @returns {number}
+ */
 exports.max = function max(values) {
     var max = -Infinity;
     var l = values.length;
@@ -9,6 +18,11 @@ exports.max = function max(values) {
     return max;
 };
 
+/**
+ * Computes the minimum of the given values
+ * @param {Array} values
+ * @returns {number}
+ */
 exports.min = function min(values) {
     var min = Infinity;
     var l = values.length;
@@ -18,6 +32,11 @@ exports.min = function min(values) {
     return min;
 };
 
+/**
+ * Computes the min and max of the given values
+ * @param {Array} values
+ * @returns {{min: number, max: number}}
+ */
 exports.minMax = function minMax(values) {
     var min = Infinity;
     var max = -Infinity;
@@ -32,29 +51,65 @@ exports.minMax = function minMax(values) {
     };
 };
 
-exports.mean = function mean(values) {
-    var sum = 0, l = values.length;
-    for (var i = 0; i < l; i++)
+/**
+ * Computes the arithmetic mean of the given values
+ * @param {Array} values
+ * @returns {number}
+ */
+exports.arithmeticMean = function arithmeticMean(values) {
+    var sum = 0;
+    var l = values.length;
+    for (var i = 0; i < l; i++) {
         sum += values[i];
+    }
     return sum / l;
 };
 
+/**
+ * {@link arithmeticMean}
+ */
+exports.mean = exports.arithmeticMean;
+
+/**
+ * Computes the geometric mean of the given values
+ * @param {Array} values
+ * @returns {number}
+ */
 exports.geometricMean = function geometricMean(values) {
-    var sum = 0, l = values.length;
-    for (var i = 0; i < l; i++)
-        sum *= values[i];
-    return Math.pow(sum, 1 / l);
+    var mul = 1;
+    var l = values.length;
+    for (var i = 0; i < l; i++) {
+        mul *= values[i];
+    }
+    return Math.pow(mul, 1 / l);
 };
 
-exports.logGeometricMean = function logGeometricMean(values) {
-    var lnsum = 0, l = values.length;
-    for (var i = 0; i < l; i++)
+/**
+ * Computes the mean of the log of the given values
+ * If the return value is exponentiated, it gives the same result as the
+ * geometric mean.
+ * @param {Array} values
+ * @returns {number}
+ */
+exports.logMean = function logMean(values) {
+    var lnsum = 0;
+    var l = values.length;
+    for (var i = 0; i < l; i++) {
         lnsum += Math.log(values[i]);
+    }
     return lnsum / l;
 };
 
+/**
+ * Computes the weighted grand mean for a list of means and sample sizes
+ * @param {Array} means - Mean values for each set of samples
+ * @param {Array} samples - Number of original values for each set of samples
+ * @returns {number}
+ */
 exports.grandMean = function grandMean(means, samples) {
-    var sum = 0, n = 0, l = means.length;
+    var sum = 0;
+    var n = 0;
+    var l = means.length;
     for (var i = 0; i < l; i++) {
         sum += samples[i] * means[i];
         n += samples[i];
@@ -62,19 +117,25 @@ exports.grandMean = function grandMean(means, samples) {
     return sum / n;
 };
 
-exports.truncatedMean = function truncatedMean(values, percent, inPlace) {
-    if (typeof(inPlace) === 'undefined') inPlace = false;
-
-    values = inPlace ? values : values.slice();
-    values.sort();
-
+/**
+ * Computes the truncated mean of the given values using a given percentage
+ * @param {Array} values
+ * @param {number} percent - The percentage of values to keep (range: [0,1])
+ * @param {boolean} [alreadySorted=false]
+ * @returns {number}
+ */
+exports.truncatedMean = function truncatedMean(values, percent, alreadySorted) {
+    if (alreadySorted === undefined) alreadySorted = false;
+    if (!alreadySorted) {
+        values = values.slice().sort(compareNumbers);
+    }
+console.log(values)
     var l = values.length;
     var k = Math.floor(l * percent);
-
     var sum = 0;
-    for (var i = k; i < l - k; i++)
+    for (var i = k; i < (l - k); i++) {
         sum += values[i];
-
+    }
     return sum / (l - 2 * k);
 };
 
@@ -100,7 +161,7 @@ exports.median = function median(values, alreadySorted) {
     if (typeof(alreadySorted) === 'undefined') alreadySorted = false;
     if (!alreadySorted) {
         values = values.slice();
-        values.sort();
+        values.sort(compareNumbers);
     }
 
     var l = values.length;
@@ -114,7 +175,7 @@ exports.quartiles = function quartiles(values, alreadySorted) {
     if (typeof(alreadySorted) === 'undefined') alreadySorted = false;
     if (!alreadySorted) {
         values = values.slice();
-        values.sort();
+        values.sort(compareNumbers);
     }
 
     var quart = values.length / 4;
