@@ -6,6 +6,8 @@ describe('mean', function () {
 
     var arr1 = [4, 36, 45, 50, 75];
     var arr2 = [3, 3, 3];
+    var unsorted = [3, 1, 6, 14, 12];
+    var sorted = [1, 3, 6, 12, 14];
 
     it('arithmetic mean', function () {
         stat.mean(arr1).should.equal(42);
@@ -29,8 +31,6 @@ describe('mean', function () {
     });
 
     it('truncated mean', function () {
-        var unsorted = [3, 1, 6, 14, 12];
-        var sorted = [1, 3, 6, 12, 14];
         stat.truncatedMean(unsorted, 0.2).should.equal(7);
         stat.truncatedMean(sorted, 0.2, true).should.equal(7);
         stat.truncatedMean(sorted, 0.5).should.equal(6);
@@ -52,6 +52,12 @@ describe('mean', function () {
         (function() {
             stat.contraHarmonicMean(arr2);
         }).should.throw(RangeError);
+    });
+
+    it('median', function () {
+        stat.median(unsorted).should.equal(6);
+        stat.median(sorted, true).should.equal(6);
+        stat.median([2,4,6,8]).should.equal(5);
     });
 
 });

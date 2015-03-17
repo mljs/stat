@@ -174,26 +174,62 @@ exports.contraHarmonicMean = function contraHarmonicMean(values) {
     return r1 / r2;
 };
 
+/**
+ * Computes the median of the given values
+ * @param {Array} values
+ * @param {boolean} [alreadySorted=false]
+ * @returns {number}
+ */
+exports.median = function median(values, alreadySorted) {
+    if (alreadySorted === undefined) alreadySorted = false;
+    if (!alreadySorted) {
+        values = values.slice().sort(compareNumbers);
+    }
+    var l = values.length;
+    var half = Math.floor(l / 2);
+    if (l % 2 === 0) {
+        return (values[half - 1] + values[half]) * 0.5;
+    } else {
+        return values[half];
+    }
+};
+
+/**
+ * Computes the variance of the given values
+ * @param {Array} values
+ * @param {boolean} [unbiased=true] - if true, divide by (n-1); if false, divide by n.
+ * @returns {number}
+ */
+exports.variance = function variance(values, unbiased) {
+    if (unbiased === undefined) unbiased = true;
+    var theMean = exports.mean(values);
+    var theVariance = 0;
+    var l = values.length;
+
+    for (var i = 0; i < l; i++) {
+        var x = values[i] - theMean;
+        theVariance += x * x;
+    }
+
+    if (unbiased) {
+        return theVariance / (l - 1);
+    } else {
+        return theVariance / l;
+    }
+};
+
+/**
+ * Computes the standard deviation of the given values
+ * @param {Array} values
+ * @param {boolean} [unbiased=true] - if true, divide by (n-1); if false, divide by n.
+ * @returns {number}
+ */
 exports.standardDeviation = function standardDeviation(values, unbiased) {
     return Math.sqrt(exports.variance(values, unbiased));
 };
 
 exports.standardError = function standardError(values) {
     return exports.standardDeviation(values) / Math.sqrt(values.length);
-};
-
-exports.median = function median(values, alreadySorted) {
-    if (typeof(alreadySorted) === 'undefined') alreadySorted = false;
-    if (!alreadySorted) {
-        values = values.slice();
-        values.sort(compareNumbers);
-    }
-
-    var l = values.length;
-    var half = Math.floor(l / 2);
-    if (l % 2 === 0)
-        return (values[half - 1] + values[half]) * 0.5;
-    return values[half];
 };
 
 exports.quartiles = function quartiles(values, alreadySorted) {
@@ -209,22 +245,6 @@ exports.quartiles = function quartiles(values, alreadySorted) {
     var q3 = values[Math.ceil(quart * 3) - 1];
 
     return {q1: q1, q2: q2, q3: q3};
-};
-
-exports.variance = function variance(values, unbiased) {
-    if (typeof(unbiased) === 'undefined') unbiased = true;
-    var theMean = exports.mean(values);
-    var theVariance = 0, l = values.length;
-
-    for (var i = 0; i < l; i++) {
-        var x = values[i] - theMean;
-        theVariance += x * x;
-    }
-
-    if (unbiased)
-        return theVariance / (l - 1);
-    else
-        return theVariance / l;
 };
 
 exports.pooledStandardDeviation = function pooledStandardDeviation(samples, unbiased) {
