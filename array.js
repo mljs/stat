@@ -129,7 +129,6 @@ exports.truncatedMean = function truncatedMean(values, percent, alreadySorted) {
     if (!alreadySorted) {
         values = values.slice().sort(compareNumbers);
     }
-console.log(values)
     var l = values.length;
     var k = Math.floor(l * percent);
     var sum = 0;
@@ -139,12 +138,38 @@ console.log(values)
     return sum / (l - 2 * k);
 };
 
-exports.contraHarmonicMean = function contraHarmonicMean(values, order) {
-    if (typeof(order) === 'undefined') order = 1;
-    var r1 = 0, r2 = 0, l = values.length;
+/**
+ * Computes the harmonic mean of the given values
+ * @param {Array} values
+ * @returns {number}
+ */
+exports.harmonicMean = function harmonicMean(values) {
+    var sum = 0;
+    var l = values.length;
     for (var i = 0; i < l; i++) {
-        r1 += Math.pow(values[i], order + 1);
-        r2 += Math.pow(values[i], order);
+        if (values[i] === 0) {
+            throw new RangeError('value at index ' + i + 'is zero');
+        }
+        sum += 1 / values[i];
+    }
+    return l / sum;
+};
+
+/**
+ * Computes the contraharmonic mean of the given values
+ * @param {Array} values
+ * @returns {number}
+ */
+exports.contraHarmonicMean = function contraHarmonicMean(values) {
+    var r1 = 0;
+    var r2 = 0;
+    var l = values.length;
+    for (var i = 0; i < l; i++) {
+        r1 += values[i] * values[i];
+        r2 += values[i];
+    }
+    if (r2 < 0) {
+        throw new RangeError('sum of values is negative');
     }
     return r1 / r2;
 };

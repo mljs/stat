@@ -28,12 +28,30 @@ describe('mean', function () {
         stat.grandMean(means, sizes).should.equal(2.1);
     });
 
-    it.skip('truncated mean', function () {
+    it('truncated mean', function () {
         var unsorted = [3, 1, 6, 14, 12];
-        var sorted = unsorted.slice().sort();
+        var sorted = [1, 3, 6, 12, 14];
         stat.truncatedMean(unsorted, 0.2).should.equal(7);
         stat.truncatedMean(sorted, 0.2, true).should.equal(7);
         stat.truncatedMean(sorted, 0.5).should.equal(6);
+    });
+
+    it('harmonic mean', function () {
+        var arr1 = [1, 2, 4];
+        var arr2 = [3, 0, 6];
+        stat.harmonicMean(arr1).should.be.approximately(1.714, 1e-3);
+        (function() {
+            stat.harmonicMean(arr2);
+        }).should.throw(RangeError);
+    });
+
+    it('contraharmonic mean', function () {
+        var arr1 = [1, 5, 6];
+        var arr2 = [2, -6, -1];
+        stat.contraHarmonicMean(arr1).should.be.approximately(5.167, 1e-3);
+        (function() {
+            stat.contraHarmonicMean(arr2);
+        }).should.throw(RangeError);
     });
 
 });
