@@ -9,6 +9,11 @@ describe('mean', function () {
     var unsorted = [3, 1, 6, 14, 12];
     var sorted = [1, 3, 6, 12, 14];
 
+    it('sum', function () {
+        stat.sum(arr1).should.equal(210);
+        stat.sum(arr2).should.equal(9);
+    });
+
     it('arithmetic mean', function () {
         stat.mean(arr1).should.equal(42);
         stat.arithmeticMean(arr1).should.equal(42);

@@ -5,6 +5,19 @@ function compareNumbers(a, b) {
 }
 
 /**
+ * Computes the sum of the given values
+ * @param {Array} values
+ * @returns {number}
+ */
+exports.sum = function sum(values) {
+    var sum = 0;
+    for (var i = 0; i < values.length; i++) {
+        sum += values[i];
+    }
+    return sum;
+};
+
+/**
  * Computes the maximum of the given values
  * @param {Array} values
  * @returns {number}

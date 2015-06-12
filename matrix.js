@@ -1,4 +1,6 @@
 'use strict';
+var arrayStat = require('./array');
+
 // https://github.com/accord-net/framework/blob/development/Sources/Accord.Statistics/Tools.cs
 
 function entropy(matrix, eps) {
@@ -424,7 +426,7 @@ function weightedMean(matrix, weights, dimension) {
         throw new Error('Invalid dimension');
     }
 
-    var weightSum = sum(weights);
+    var weightSum = arrayStat.sum(weights);
     if (weightSum !== 0) {
         for (i = 0, ii = means.length; i < ii; i++) {
             means[i] /= weightSum;
@@ -493,15 +495,6 @@ function weightedScatter(matrix, weights, means, factor, dimension) {
     }
 
     return cov;
-}
-
-// private
-function sum(vector) {
-    var sum = 0, l = vector.length;
-    for (var i = 0; i < l; i++) {
-        sum += vector[i];
-    }
-    return sum;
 }
 
 module.exports = {
