@@ -1,6 +1,6 @@
 {
   "name": "ml-stat",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Functions for computing stats on arrays and matrices",
   "main": "index.js",
   "scripts": {
