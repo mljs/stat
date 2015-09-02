@@ -140,7 +140,7 @@ exports.grandMean = function grandMean(means, samples) {
 exports.truncatedMean = function truncatedMean(values, percent, alreadySorted) {
     if (alreadySorted === undefined) alreadySorted = false;
     if (!alreadySorted) {
-        values = values.slice().sort(compareNumbers);
+        values = [].concat(values).sort(compareNumbers);
     }
     var l = values.length;
     var k = Math.floor(l * percent);
@@ -196,7 +196,7 @@ exports.contraHarmonicMean = function contraHarmonicMean(values) {
 exports.median = function median(values, alreadySorted) {
     if (alreadySorted === undefined) alreadySorted = false;
     if (!alreadySorted) {
-        values = values.slice().sort(compareNumbers);
+        values = [].concat(values).sort(compareNumbers);
     }
     var l = values.length;
     var half = Math.floor(l / 2);
@@ -248,8 +248,7 @@ exports.standardError = function standardError(values) {
 exports.quartiles = function quartiles(values, alreadySorted) {
     if (typeof(alreadySorted) === 'undefined') alreadySorted = false;
     if (!alreadySorted) {
-        values = values.slice();
-        values.sort(compareNumbers);
+        values = [].concat(values).sort(compareNumbers);
     }
 
     var quart = values.length / 4;
@@ -426,7 +425,7 @@ exports.center = function center(values, inPlace) {
 
     var result = values;
     if (!inPlace)
-        result = values.slice();
+        result = [].concat(values);
 
     var theMean = exports.mean(result), l = result.length;
     for (var i = 0; i < l; i++)
