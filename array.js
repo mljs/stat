@@ -23,9 +23,9 @@ exports.sum = function sum(values) {
  * @returns {number}
  */
 exports.max = function max(values) {
-    var max = -Infinity;
+    var max = values[0];
     var l = values.length;
-    for (var i = 0; i < l; i++) {
+    for (var i = 1; i < l; i++) {
         if (values[i] > max) max = values[i];
     }
     return max;
@@ -37,9 +37,9 @@ exports.max = function max(values) {
  * @returns {number}
  */
 exports.min = function min(values) {
-    var min = Infinity;
+    var min = values[0];
     var l = values.length;
-    for (var i = 0; i < l; i++) {
+    for (var i = 1; i < l; i++) {
         if (values[i] < min) min = values[i];
     }
     return min;
@@ -51,10 +51,10 @@ exports.min = function min(values) {
  * @returns {{min: number, max: number}}
  */
 exports.minMax = function minMax(values) {
-    var min = Infinity;
-    var max = -Infinity;
+    var min = values[0];
+    var max = values[0];
     var l = values.length;
-    for (var i = 0; i < l; i++) {
+    for (var i = 1; i < l; i++) {
         if (values[i] < min) min = values[i];
         if (values[i] > max) max = values[i];
     }
