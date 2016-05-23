@@ -29,7 +29,7 @@
   "homepage": "https://github.com/mljs/stat",
   "devDependencies": {
     "mocha-better-spec-reporter": "^3.0.1",
-    "mocha": "2.4.5",
+    "mocha": "^2.5.1",
     "should": "^8.2.2"
   }
 }
