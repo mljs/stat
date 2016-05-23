@@ -28,8 +28,8 @@
   },
   "homepage": "https://github.com/mljs/stat",
   "devDependencies": {
-    "mocha-better-spec-reporter": "latest",
-    "mocha": "latest",
-    "should": "latest"
+    "mocha-better-spec-reporter": "^3.0.1",
+    "mocha": "2.4.5",
+    "should": "^8.2.2"
   }
 }
