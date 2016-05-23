@@ -252,7 +252,7 @@ exports.standardError = function standardError(values) {
  *  The formula for the standard deviation only holds for Gaussian random variables.
  * @returns {number}
  */
-function robustMeanAndStddev(y){
+exports.robustMeanAndStddev = function robustMeanAndStddev(y){
     var mean = 0,stddev=0;
     var length = y.length,i=0;
     for(i = 0; i < length; i++){
