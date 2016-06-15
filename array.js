@@ -249,7 +249,7 @@ exports.standardError = function standardError(values) {
  * IEEE Transactions on biomedical engineering, vol. 52, no. 1, january 2005, p. 76-
  * Calculate the standard deviation via the Median of the absolute deviation
  *  The formula for the standard deviation only holds for Gaussian random variables.
- * @returns {number}
+ * @returns {mean: number, stddev: number}
  */
 exports.robustMeanAndStddev = function robustMeanAndStddev(y){
     var mean = 0,stddev=0;
@@ -268,7 +268,7 @@ exports.robustMeanAndStddev = function robustMeanAndStddev(y){
         stddev = 0.5*(averageDeviations[length/2]+averageDeviations[length/2-1]) / 0.6745;
     }
 
-    return [mean, stddev];
+    return {mean: mean, stddev: stddev};
 };
 
 exports.quartiles = function quartiles(values, alreadySorted) {
