@@ -261,7 +261,7 @@ exports.robustMeanAndStddev = function robustMeanAndStddev(y){
     var averageDeviations = new Array(length);
     for (i = 0; i < length; i++)
         averageDeviations[i] = Math.abs(y[i] - mean);
-    averageDeviations.sort();
+    averageDeviations.sort(compareNumbers);
     if (length % 2 == 1) {
         stddev = averageDeviations[(length-1)/2] / 0.6745;
     } else {
