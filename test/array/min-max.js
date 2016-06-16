@@ -16,7 +16,7 @@ describe('min-max', function () {
 
     it('should find min and max values', function () {
         var result = stat.minMax(arr);
-        result.should.be.an.Object;
+        result.should.be.an.Object();
         result.min.should.equal(-16);
         result.max.should.equal(32);
     });
