@@ -6,6 +6,38 @@ function compareNumbers(a, b) {
     return a - b;
 }
 
+exports.max = function max(matrix) {
+    var max = -Infinity;
+    for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] > max) max = matrix[i][j];
+        }
+    }
+    return max;
+};
+
+exports.min = function min(matrix) {
+    var min = Infinity;
+    for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] < min) min = matrix[i][j];
+        }
+    }
+    return min;
+};
+
+exports.minMax = function minMax(matrix) {
+    var min = Infinity;
+    var max = -Infinity;
+    for (var i = 0; i < matrix.length; i++) {
+        for (var j = 0; j < matrix[i].length; j++) {
+            if (matrix[i][j] < min) min = matrix[i][j];
+            if (matrix[i][j] > max) max = matrix[i][j];
+        }
+    }
+    return {min, max};
+};
+
 exports.entropy = function entropy(matrix, eps) {
     if (typeof(eps) === 'undefined') {
         eps = 0;
