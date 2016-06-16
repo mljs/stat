@@ -1,3 +1,9 @@
+1.2.0 / 2016-06-16
+==================
+
+* add array.robustMeanAndStdev
+* add matrix.min, matrix.max and matrix.minMax
+
 1.1.0 / 2015-09-02
 ==================
 
