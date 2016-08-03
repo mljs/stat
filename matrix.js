@@ -96,6 +96,43 @@ exports.mean = function mean(matrix, dimension) {
     return theMean;
 };
 
+exports.sum = function sum(matrix, dimension) {
+    if (typeof(dimension) === 'undefined') {
+        dimension = 0;
+    }
+    var rows = matrix.length,
+        cols = matrix[0].length,
+        theSum, i, j;
+
+    if (dimension === -1) {
+        theSum = [0];
+        for (i = 0; i < rows; i++) {
+            for (j = 0; j < cols; j++) {
+                theSum[0] += matrix[i][j];
+            }
+        }
+    } else if (dimension === 0) {
+        theSum = new Array(cols);
+        for (j = 0; j < cols; j++) {
+            theSum[j] = 0;
+            for (i = 0; i < rows; i++) {
+                theSum[j] += matrix[i][j];
+            }
+        }
+    } else if (dimension === 1) {
+        theSum = new Array(rows);
+        for (j = 0; j < rows; j++) {
+            theSum[j] = 0;
+            for (i = 0; i < cols; i++) {
+                theSum[j] += matrix[j][i];
+            }
+        }
+    } else {
+        throw new Error('Invalid dimension');
+    }
+    return theSum;
+};
+
 exports.standardDeviation = function standardDeviation(matrix, means, unbiased) {
     var vari = exports.variance(matrix, means, unbiased), l = vari.length;
     for (var i = 0; i < l; i++) {
