@@ -39,7 +39,7 @@ exports.minMax = function minMax(matrix) {
 };
 
 exports.entropy = function entropy(matrix, eps) {
-    if (typeof(eps) === 'undefined') {
+    if (typeof (eps) === 'undefined') {
         eps = 0;
     }
     var sum = 0,
@@ -54,7 +54,7 @@ exports.entropy = function entropy(matrix, eps) {
 };
 
 exports.mean = function mean(matrix, dimension) {
-    if (typeof(dimension) === 'undefined') {
+    if (typeof (dimension) === 'undefined') {
         dimension = 0;
     }
     var rows = matrix.length,
@@ -97,7 +97,7 @@ exports.mean = function mean(matrix, dimension) {
 };
 
 exports.sum = function sum(matrix, dimension) {
-    if (typeof(dimension) === 'undefined') {
+    if (typeof (dimension) === 'undefined') {
         dimension = 0;
     }
     var rows = matrix.length,
@@ -134,7 +134,7 @@ exports.sum = function sum(matrix, dimension) {
 };
 
 exports.product = function product(matrix, dimension) {
-    if (typeof(dimension) === 'undefined') {
+    if (typeof (dimension) === 'undefined') {
         dimension = 0;
     }
     var rows = matrix.length,
@@ -179,7 +179,7 @@ exports.standardDeviation = function standardDeviation(matrix, means, unbiased) 
 };
 
 exports.variance = function variance(matrix, means, unbiased) {
-    if (typeof(unbiased) === 'undefined') {
+    if (typeof (unbiased) === 'undefined') {
         unbiased = true;
     }
     means = means || exports.mean(matrix);
@@ -262,7 +262,7 @@ exports.mode = function mode(matrix) {
 };
 
 exports.skewness = function skewness(matrix, unbiased) {
-    if (typeof(unbiased) === 'undefined') unbiased = true;
+    if (typeof (unbiased) === 'undefined') unbiased = true;
     var means = exports.mean(matrix);
     var n = matrix.length, l = means.length;
     var skew = new Array(l);
@@ -291,7 +291,7 @@ exports.skewness = function skewness(matrix, unbiased) {
 };
 
 exports.kurtosis = function kurtosis(matrix, unbiased) {
-    if (typeof(unbiased) === 'undefined') unbiased = true;
+    if (typeof (unbiased) === 'undefined') unbiased = true;
     var means = exports.mean(matrix);
     var n = matrix.length, m = matrix[0].length;
     var kurt = new Array(m);
@@ -321,7 +321,7 @@ exports.kurtosis = function kurtosis(matrix, unbiased) {
 
 exports.standardError = function standardError(matrix) {
     var samples = matrix.length;
-    var standardDeviations = exports.standardDeviation(matrix)
+    var standardDeviations = exports.standardDeviation(matrix);
     var l = standardDeviations.length;
     var standardErrors = new Array(l);
     var sqrtN = Math.sqrt(samples);
@@ -337,10 +337,10 @@ exports.covariance = function covariance(matrix, dimension) {
 };
 
 exports.scatter = function scatter(matrix, divisor, dimension) {
-    if (typeof(dimension) === 'undefined') {
+    if (typeof (dimension) === 'undefined') {
         dimension = 0;
     }
-    if (typeof(divisor) === 'undefined') {
+    if (typeof (divisor) === 'undefined') {
         if (dimension === 0) {
             divisor = matrix.length - 1;
         } else if (dimension === 1) {
@@ -422,7 +422,7 @@ exports.correlation = function correlation(matrix) {
 
 exports.zScores = function zScores(matrix, means, standardDeviations) {
     means = means || exports.mean(matrix);
-    if (typeof(standardDeviations) === 'undefined') standardDeviations = exports.standardDeviation(matrix, true, means);
+    if (typeof (standardDeviations) === 'undefined') standardDeviations = exports.standardDeviation(matrix, true, means);
     return exports.standardize(exports.center(matrix, means, false), standardDeviations, true);
 };
 
@@ -449,7 +449,7 @@ exports.center = function center(matrix, means, inPlace) {
 };
 
 exports.standardize = function standardize(matrix, standardDeviations, inPlace) {
-    if (typeof(standardDeviations) === 'undefined') standardDeviations = exports.standardDeviation(matrix);
+    if (typeof (standardDeviations) === 'undefined') standardDeviations = exports.standardDeviation(matrix);
     var result = matrix,
         l = matrix.length,
         i, j, jj;
@@ -500,7 +500,7 @@ exports.weightedVariance = function weightedVariance(matrix, weights) {
 };
 
 exports.weightedMean = function weightedMean(matrix, weights, dimension) {
-    if (typeof(dimension) === 'undefined') {
+    if (typeof (dimension) === 'undefined') {
         dimension = 0;
     }
     var rows = matrix.length;
@@ -560,7 +560,7 @@ exports.weightedCovariance = function weightedCovariance(matrix, weights, means,
 exports.weightedScatter = function weightedScatter(matrix, weights, means, factor, dimension) {
     dimension = dimension || 0;
     means = means || exports.weightedMean(matrix, weights, dimension);
-    if (typeof(factor) === 'undefined') {
+    if (typeof (factor) === 'undefined') {
         factor = 1;
     }
     var rows = matrix.length;

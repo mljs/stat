@@ -45,7 +45,7 @@ describe('mean', function () {
         var arr1 = [1, 2, 4];
         var arr2 = [3, 0, 6];
         stat.harmonicMean(arr1).should.be.approximately(1.714, 1e-3);
-        (function() {
+        (function () {
             stat.harmonicMean(arr2);
         }).should.throw(RangeError);
     });
@@ -54,7 +54,7 @@ describe('mean', function () {
         var arr1 = [1, 5, 6];
         var arr2 = [2, -6, -1];
         stat.contraHarmonicMean(arr1).should.be.approximately(5.167, 1e-3);
-        (function() {
+        (function () {
             stat.contraHarmonicMean(arr2);
         }).should.throw(RangeError);
     });
@@ -62,7 +62,7 @@ describe('mean', function () {
     it('median', function () {
         stat.median(unsorted).should.equal(6);
         stat.median(sorted, true).should.equal(6);
-        stat.median([2,4,6,8]).should.equal(5);
+        stat.median([2, 4, 6, 8]).should.equal(5);
     });
 
 });

@@ -262,7 +262,7 @@ exports.robustMeanAndStdev = function robustMeanAndStdev(y) {
     for (i = 0; i < length; i++)
         averageDeviations[i] = Math.abs(y[i] - mean);
     averageDeviations.sort(compareNumbers);
-    if (length % 2 == 1) {
+    if (length % 2 === 1) {
         stdev = averageDeviations[(length - 1) / 2] / 0.6745;
     } else {
         stdev = 0.5 * (averageDeviations[length / 2] + averageDeviations[length / 2 - 1]) / 0.6745;
@@ -272,7 +272,7 @@ exports.robustMeanAndStdev = function robustMeanAndStdev(y) {
 };
 
 exports.quartiles = function quartiles(values, alreadySorted) {
-    if (typeof(alreadySorted) === 'undefined') alreadySorted = false;
+    if (typeof (alreadySorted) === 'undefined') alreadySorted = false;
     if (!alreadySorted) {
         values = [].concat(values).sort(compareNumbers);
     }
@@ -290,7 +290,7 @@ exports.pooledStandardDeviation = function pooledStandardDeviation(samples, unbi
 };
 
 exports.pooledVariance = function pooledVariance(samples, unbiased) {
-    if (typeof(unbiased) === 'undefined') unbiased = true;
+    if (typeof (unbiased) === 'undefined') unbiased = true;
     var sum = 0;
     var length = 0, l = samples.length;
     for (var i = 0; i < l; i++) {
@@ -340,12 +340,12 @@ exports.mode = function mode(values) {
 };
 
 exports.covariance = function covariance(vector1, vector2, unbiased) {
-    if (typeof(unbiased) === 'undefined') unbiased = true;
+    if (typeof (unbiased) === 'undefined') unbiased = true;
     var mean1 = exports.mean(vector1);
     var mean2 = exports.mean(vector2);
 
     if (vector1.length !== vector2.length)
-        throw "Vectors do not have the same dimensions";
+        throw 'Vectors do not have the same dimensions';
 
     var cov = 0, l = vector1.length;
     for (var i = 0; i < l; i++) {
@@ -361,7 +361,7 @@ exports.covariance = function covariance(vector1, vector2, unbiased) {
 };
 
 exports.skewness = function skewness(values, unbiased) {
-    if (typeof(unbiased) === 'undefined') unbiased = true;
+    if (typeof (unbiased) === 'undefined') unbiased = true;
     var theMean = exports.mean(values);
 
     var s2 = 0, s3 = 0, l = values.length;
@@ -378,14 +378,13 @@ exports.skewness = function skewness(values, unbiased) {
         var a = Math.sqrt(l * (l - 1));
         var b = l - 2;
         return (a / b) * g;
-    }
-    else {
+    } else {
         return g;
     }
 };
 
 exports.kurtosis = function kurtosis(values, unbiased) {
-    if (typeof(unbiased) === 'undefined') unbiased = true;
+    if (typeof (unbiased) === 'undefined') unbiased = true;
     var theMean = exports.mean(values);
     var n = values.length, s2 = 0, s4 = 0;
 
@@ -404,14 +403,13 @@ exports.kurtosis = function kurtosis(values, unbiased) {
         var c = ((n - 1) * (n - 1)) / ((n - 2) * (n - 3));
 
         return a * b - 3 * c;
-    }
-    else {
+    } else {
         return m4 / (m2 * m2) - 3;
     }
 };
 
 exports.entropy = function entropy(values, eps) {
-    if (typeof(eps) === 'undefined') eps = 0;
+    if (typeof (eps) === 'undefined') eps = 0;
     var sum = 0, l = values.length;
     for (var i = 0; i < l; i++)
         sum += values[i] * Math.log(values[i] + eps);
@@ -447,7 +445,7 @@ exports.weightedVariance = function weightedVariance(values, weights) {
 };
 
 exports.center = function center(values, inPlace) {
-    if (typeof(inPlace) === 'undefined') inPlace = false;
+    if (typeof (inPlace) === 'undefined') inPlace = false;
 
     var result = values;
     if (!inPlace)
@@ -459,8 +457,8 @@ exports.center = function center(values, inPlace) {
 };
 
 exports.standardize = function standardize(values, standardDev, inPlace) {
-    if (typeof(standardDev) === 'undefined') standardDev = exports.standardDeviation(values);
-    if (typeof(inPlace) === 'undefined') inPlace = false;
+    if (typeof (standardDev) === 'undefined') standardDev = exports.standardDeviation(values);
+    if (typeof (inPlace) === 'undefined') inPlace = false;
     var l = values.length;
     var result = inPlace ? values : new Array(l);
     for (var i = 0; i < l; i++)
