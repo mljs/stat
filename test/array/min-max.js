@@ -1,6 +1,6 @@
 'use strict';
 
-var stat = require('../../array');
+var stat = require('../../src/array');
 
 describe('min-max', function () {
 

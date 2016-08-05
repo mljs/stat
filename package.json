@@ -2,8 +2,10 @@
   "name": "ml-stat",
   "version": "1.2.0",
   "description": "Functions for computing stats on arrays and matrices",
-  "main": "index.js",
+  "main": "src/stat.js",
   "scripts": {
+    "eslint": "eslint src test",
+    "eslint-fix": "npm run eslint -- --fix",
     "test": "mocha --require should --reporter mocha-better-spec-reporter --recursive"
   },
   "repository": {
@@ -28,6 +30,9 @@
   },
   "homepage": "https://github.com/mljs/stat",
   "devDependencies": {
+    "eslint": "^3.1.0",
+    "eslint-config-cheminfo": "^1.0.0",
+    "eslint-plugin-no-only-tests": "^1.1.0",
     "mocha-better-spec-reporter": "^3.0.1",
     "mocha": "^2.5.1",
     "should": "^8.2.2"

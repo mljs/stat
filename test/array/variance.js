@@ -1,6 +1,6 @@
 'use strict';
 
-var stat = require('../../array');
+var stat = require('../../src/array');
 
 describe('variance and standard deviation', function () {
 
