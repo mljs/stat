@@ -1,3 +1,14 @@
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/mljs/stat/compare/v1.2.0...v1.3.0) (2016-08-05)
+
+
+### Features
+
+* add matrix product ([3e9a58e](https://github.com/mljs/stat/commit/3e9a58e))
+* add sum in matrix ([c03bdb1](https://github.com/mljs/stat/commit/c03bdb1))
+
+
+
 1.2.0 / 2016-06-16
 ==================
 
