@@ -1,6 +1,6 @@
 'use strict';
 
-var stat = require('../../src/array');
+var stat = require('../../array');
 
 describe('Robust estimators', function () {
     //Gaussian random numbers with mean = 1 and std = 1
