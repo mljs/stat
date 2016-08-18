@@ -1,3 +1,13 @@
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/mljs/stat/compare/v1.3.0...v1.3.1) (2016-08-18)
+
+
+### Bug Fixes
+
+* fix ability to load subpart of the library directly from required package name ([0999953](https://github.com/mljs/stat/commit/0999953))
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/mljs/stat/compare/v1.2.0...v1.3.0) (2016-08-05)
 
