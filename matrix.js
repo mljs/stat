@@ -35,7 +35,10 @@ exports.minMax = function minMax(matrix) {
             if (matrix[i][j] > max) max = matrix[i][j];
         }
     }
-    return {min, max};
+    return {
+        min:min,
+        max:max
+    };
 };
 
 exports.entropy = function entropy(matrix, eps) {
