@@ -1,3 +1,8 @@
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/mljs/stat/compare/v1.3.2...v1.3.3) (2016-09-02)
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/mljs/stat/compare/v1.3.1...v1.3.2) (2016-09-02)
 
