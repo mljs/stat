@@ -268,7 +268,10 @@ exports.robustMeanAndStdev = function robustMeanAndStdev(y) {
         stdev = 0.5 * (averageDeviations[length / 2] + averageDeviations[length / 2 - 1]) / 0.6745;
     }
 
-    return {mean, stdev};
+    return {
+        mean: mean,
+        stdev: stdev
+    };
 };
 
 exports.quartiles = function quartiles(values, alreadySorted) {
