@@ -34,7 +34,7 @@
     "eslint-config-cheminfo": "^1.0.0",
     "eslint-plugin-no-only-tests": "^1.1.0",
     "mocha-better-spec-reporter": "^3.0.1",
-    "mocha": "^2.5.1",
-    "should": "^8.2.2"
+    "mocha": "^3.1.2",
+    "should": "^11.1.1"
   }
 }
