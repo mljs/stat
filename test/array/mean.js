@@ -62,7 +62,6 @@ describe('mean', function () {
     it('median', function () {
         stat.median(unsorted).should.equal(6);
         stat.median(sorted, true).should.equal(6);
-        stat.median([2, 4, 6, 8]).should.equal(5);
     });
 
 });
