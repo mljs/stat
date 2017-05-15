@@ -138,12 +138,11 @@ exports.grandMean = function grandMean(means, samples) {
  * @returns {number}
  */
 exports.truncatedMean = function truncatedMean(values, percent, alreadySorted) {
-    if (alreadySorted === undefined) alreadySorted = false;
-    if (!alreadySorted) {
+    if (alreadySorted === undefined || !alreadySorted)
         values = [].concat(values).sort(compareNumbers);
-    }
+
     var l = values.length;
-    var k = Math.floor(l * percent);
+    var k = (l * percent)>>0;
     var sum = 0;
     for (var i = k; i < (l - k); i++) {
         sum += values[i];
@@ -160,9 +159,8 @@ exports.harmonicMean = function harmonicMean(values) {
     var sum = 0;
     var l = values.length;
     for (var i = 0; i < l; i++) {
-        if (values[i] === 0) {
+        if (values[i] === 0)
             throw new RangeError('value at index ' + i + 'is zero');
-        }
         sum += 1 / values[i];
     }
     return l / sum;
@@ -181,9 +179,9 @@ exports.contraHarmonicMean = function contraHarmonicMean(values) {
         r1 += values[i] * values[i];
         r2 += values[i];
     }
-    if (r2 < 0) {
-        throw new RangeError('sum of values is negative');
-    }
+    if (r2 <= 0)
+        throw new RangeError('sum of values is negative or zero');
+
     return r1 / r2;
 };
 
@@ -194,17 +192,18 @@ exports.contraHarmonicMean = function contraHarmonicMean(values) {
  * @returns {number}
  */
 exports.median = function median(values, alreadySorted) {
-    if (alreadySorted === undefined) alreadySorted = false;
-    if (!alreadySorted) {
+    if (alreadySorted === undefined || !alreadySorted)
         values = [].concat(values).sort(compareNumbers);
-    }
-    var l = values.length;
-    var half = Math.floor(l / 2);
-    if (l % 2 === 0) {
-        return (values[half - 1] + values[half]) * 0.5;
-    } else {
-        return values[half];
-    }
+
+    var result = values.length * 0.5;
+    var closeIndex = result>>0;
+
+    if (result === closeIndex)
+        result = (values[closeIndex - 1] + values[closeIndex]) * 0.5;
+    else
+        result = values[closeIndex];
+
+    return result;
 };
 
 /**
@@ -214,7 +213,6 @@ exports.median = function median(values, alreadySorted) {
  * @returns {number}
  */
 exports.variance = function variance(values, unbiased) {
-    if (unbiased === undefined) unbiased = true;
     var theMean = exports.mean(values);
     var theVariance = 0;
     var l = values.length;
@@ -224,11 +222,12 @@ exports.variance = function variance(values, unbiased) {
         theVariance += x * x;
     }
 
-    if (unbiased) {
-        return theVariance / (l - 1);
-    } else {
-        return theVariance / l;
-    }
+    if (unbiased === undefined || unbiased)
+        theVariance /= (l - 1);
+    else
+        theVariance /= l;
+
+    return theVariance
 };
 
 /**
@@ -251,16 +250,17 @@ exports.standardError = function standardError(values) {
  *  The formula for the standard deviation only holds for Gaussian random variables.
  * @returns {{mean: number, stdev: number}}
  */
-exports.robustMeanAndStdev = function robustMeanAndStdev(y) {
+exports.robustMeanAndStdev = function robustMeanAndStdev(values) {
     var mean = 0, stdev = 0;
-    var length = y.length, i = 0;
+    var length = values.length, i = 0;
     for (i = 0; i < length; i++) {
-        mean += y[i];
+        mean += values[i];
     }
     mean /= length;
     var averageDeviations = new Array(length);
     for (i = 0; i < length; i++)
-        averageDeviations[i] = Math.abs(y[i] - mean);
+        averageDeviations[i] = Math.abs(values[i] - mean);
+
     averageDeviations.sort(compareNumbers);
     if (length % 2 === 1) {
         stdev = averageDeviations[(length - 1) / 2] / 0.6745;
